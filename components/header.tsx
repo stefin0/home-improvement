@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Accordion,
   AccordionContent,
@@ -14,8 +16,17 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import { ScrollArea } from "./ui/scroll-area";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "./ui/navigation-menu";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   {
@@ -50,63 +61,101 @@ const navLinks = [
       { href: "/gallery", text: "Gallery" },
     ],
   },
+  {
+    title: "Testimonials",
+    value: "item-4",
+    subLinks: [
+      { href: "/customer-testimonials", text: "Customer Testimonials" },
+    ],
+  },
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+
   return (
-    <header className="p-4">
-      <Link href="/">
-        <Image
-          src="/logo.svg"
-          alt="Company Logo"
-          width={200}
-          height={100}
-          className="w-[clamp(120px,15vw,200px)] h-auto rounded-md"
-          priority
-        />
-      </Link>
+    <header className="p-4 flex justify-between items-center">
+      <Button asChild variant={"outline"}>
+        <Link href="/">LOGO</Link>
+      </Button>
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant={"ghost"} size={"icon"} className="size-8">
+          <Button
+            variant={"ghost"}
+            size={"icon"}
+            className={`size-8 justify-self-end md:hidden ${pathname === "/" ? "text-primary-foreground" : ""}`}
+          >
             <Menu />
           </Button>
         </SheetTrigger>
-        <SheetContent side="top" className="p-8">
+        <SheetContent side="top" className="p-8 max-h-full">
           <SheetHeader className="p-0">
             <SheetTitle className="text-muted-foreground text-sm font-medium">
               Menu
             </SheetTitle>
           </SheetHeader>
-          <Accordion type="multiple" className="w-full">
-            {navLinks.map((navItem) => (
-              <AccordionItem value={navItem.value} key={navItem.value}>
-                <AccordionTrigger className="text-lg">
-                  {navItem.title}
-                </AccordionTrigger>
-                <AccordionContent className="flex flex-col text-balance">
-                  {navItem.subLinks.map((link) => (
-                    <SheetClose asChild key={link.href}>
-                      <Button
-                        asChild
-                        variant={"link"}
-                        className="text-foreground"
-                      >
-                        <Link
-                          href={link.href}
-                          className="underline justify-start"
+          <ScrollArea className="overflow-auto">
+            <Accordion type="multiple" className="w-full">
+              {navLinks.map((navItem) => (
+                <AccordionItem value={navItem.value} key={navItem.value}>
+                  <AccordionTrigger className="text-lg">
+                    {navItem.title}
+                  </AccordionTrigger>
+                  <AccordionContent className="flex flex-col text-balance">
+                    {navItem.subLinks.map((link) => (
+                      <SheetClose asChild key={link.href}>
+                        <Button
+                          asChild
+                          variant={"link"}
+                          className="text-foreground"
                         >
-                          {link.text}
-                        </Link>
-                      </Button>
-                    </SheetClose>
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+                          <Link
+                            href={link.href}
+                            className="underline justify-start"
+                          >
+                            {link.text}
+                          </Link>
+                        </Button>
+                      </SheetClose>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </ScrollArea>
         </SheetContent>
       </Sheet>
-      <Button className="w-full">Get a Quote</Button>
+      <NavigationMenu viewport={false} className="hidden md:flex">
+        <NavigationMenuList>
+          {navLinks.map((navItem) => (
+            <NavigationMenuItem key={navItem.value}>
+              <NavigationMenuTrigger
+                className={
+                  pathname === "/"
+                    ? "bg-transparent text-primary-foreground"
+                    : ""
+                }
+              >
+                {navItem.title}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[200px] gap-4">
+                  {navItem.subLinks.map((link) => (
+                    <li key={link.href}>
+                      <NavigationMenuLink asChild>
+                        <Link href={link.href}>{link.text}</Link>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          ))}
+        </NavigationMenuList>
+      </NavigationMenu>
+      <Button asChild className="col-span-2 hidden md:inline-flex">
+        <Link href="/contact">Get a Free Quote</Link>
+      </Button>
     </header>
   );
 }
