@@ -27,6 +27,7 @@ import {
   NavigationMenuTrigger,
 } from "./ui/navigation-menu";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   {
@@ -72,90 +73,96 @@ const navLinks = [
 
 export default function Header() {
   const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   return (
-    <header className="p-4 flex justify-between items-center">
-      <Button asChild variant={"outline"}>
-        <Link href="/">LOGO</Link>
-      </Button>
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button
-            variant={"ghost"}
-            size={"icon"}
-            className={`size-8 justify-self-end md:hidden ${pathname === "/" ? "text-primary-foreground" : ""}`}
-          >
-            <Menu />
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="top" className="p-8 max-h-full">
-          <SheetHeader className="p-0">
-            <SheetTitle className="text-muted-foreground text-sm font-medium">
-              Menu
-            </SheetTitle>
-          </SheetHeader>
-          <ScrollArea className="overflow-auto">
-            <Accordion type="multiple" className="w-full">
-              {navLinks.map((navItem) => (
-                <AccordionItem value={navItem.value} key={navItem.value}>
-                  <AccordionTrigger className="text-lg">
-                    {navItem.title}
-                  </AccordionTrigger>
-                  <AccordionContent className="flex flex-col text-balance">
-                    {navItem.subLinks.map((link) => (
-                      <SheetClose asChild key={link.href}>
-                        <Button
-                          asChild
-                          variant={"link"}
-                          className="text-foreground"
-                        >
-                          <Link
-                            href={link.href}
-                            className="underline justify-start"
+    <header
+      className={cn("w-full", isHomePage ? "absolute z-1" : "border-b-1")}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between p-4">
+        <Button asChild variant={"outline"}>
+          <Link href="/">LOGO</Link>
+        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              variant={"ghost"}
+              size={"icon"}
+              className={cn(
+                "size-8 justify-self-end md:hidden",
+                isHomePage ? "text-primary-foreground" : "",
+              )}
+            >
+              <Menu />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="top" className="max-h-full p-8">
+            <SheetHeader className="p-0">
+              <SheetTitle className="text-muted-foreground text-sm font-medium">
+                Menu
+              </SheetTitle>
+            </SheetHeader>
+            <ScrollArea className="overflow-auto">
+              <Accordion type="multiple" className="w-full">
+                {navLinks.map((navItem) => (
+                  <AccordionItem value={navItem.value} key={navItem.value}>
+                    <AccordionTrigger className="text-lg">
+                      {navItem.title}
+                    </AccordionTrigger>
+                    <AccordionContent className="flex flex-col text-balance">
+                      {navItem.subLinks.map((link) => (
+                        <SheetClose asChild key={link.href}>
+                          <Button
+                            asChild
+                            variant={"link"}
+                            className="text-foreground"
                           >
-                            {link.text}
-                          </Link>
-                        </Button>
-                      </SheetClose>
+                            <Link
+                              href={link.href}
+                              className="justify-start underline"
+                            >
+                              {link.text}
+                            </Link>
+                          </Button>
+                        </SheetClose>
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </ScrollArea>
+          </SheetContent>
+        </Sheet>
+        <NavigationMenu viewport={false} className="hidden md:flex">
+          <NavigationMenuList>
+            {navLinks.map((navItem) => (
+              <NavigationMenuItem key={navItem.value}>
+                <NavigationMenuTrigger
+                  className={cn(
+                    isHomePage ? "text-primary-foreground bg-transparent" : "",
+                  )}
+                >
+                  {navItem.title}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-52 gap-4">
+                    {navItem.subLinks.map((link) => (
+                      <li key={link.href}>
+                        <NavigationMenuLink asChild>
+                          <Link href={link.href}>{link.text}</Link>
+                        </NavigationMenuLink>
+                      </li>
                     ))}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </ScrollArea>
-        </SheetContent>
-      </Sheet>
-      <NavigationMenu viewport={false} className="hidden md:flex">
-        <NavigationMenuList>
-          {navLinks.map((navItem) => (
-            <NavigationMenuItem key={navItem.value}>
-              <NavigationMenuTrigger
-                className={
-                  pathname === "/"
-                    ? "bg-transparent text-primary-foreground"
-                    : ""
-                }
-              >
-                {navItem.title}
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[200px] gap-4">
-                  {navItem.subLinks.map((link) => (
-                    <li key={link.href}>
-                      <NavigationMenuLink asChild>
-                        <Link href={link.href}>{link.text}</Link>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          ))}
-        </NavigationMenuList>
-      </NavigationMenu>
-      <Button asChild className="col-span-2 hidden md:inline-flex">
-        <Link href="/contact">Get a Free Quote</Link>
-      </Button>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
+        <Button asChild className="col-span-2 hidden md:inline-flex">
+          <Link href="/contact">Get a Free Quote</Link>
+        </Button>
+      </div>
     </header>
   );
 }
