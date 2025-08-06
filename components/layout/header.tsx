@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import Link from "next/link";
-import { ScrollArea } from "./ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -25,51 +25,10 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "./ui/navigation-menu";
+} from "@/components/ui/navigation-menu";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-
-const navLinks = [
-  {
-    title: "About Us",
-    value: "item-1",
-    subLinks: [
-      { href: "/about-us", text: "About Us" },
-      { href: "/faqs", text: "FAQs" },
-      { href: "/service-areas", text: "Service Areas" },
-      { href: "/careers", text: "Careers" },
-      { href: "/financing", text: "Financing" },
-      { href: "/blog", text: "Blog" },
-    ],
-  },
-  {
-    title: "Services",
-    value: "item-2",
-    subLinks: [
-      { href: "/services", text: "Services" },
-      { href: "/vinyl-windows-san-diego", text: "High Performance Windows" },
-      { href: "/san-diego-roofing-services", text: "Cool Roofing Systems" },
-      { href: "/coolwall-texcote-colors", text: "COOLWALL Colors" },
-      { href: "/patio-covers", text: "Patio Covers" },
-      { href: "/hvac-services", text: "HVAC Services" },
-    ],
-  },
-  {
-    title: "Projects",
-    value: "item-3",
-    subLinks: [
-      { href: "/customer-projects", text: "Customer Projects" },
-      { href: "/gallery", text: "Gallery" },
-    ],
-  },
-  {
-    title: "Testimonials",
-    value: "item-4",
-    subLinks: [
-      { href: "/customer-testimonials", text: "Customer Testimonials" },
-    ],
-  },
-];
+import { navLinks } from "@/config/nav";
 
 export default function Header() {
   const pathname = usePathname();
@@ -80,9 +39,12 @@ export default function Header() {
       className={cn("w-full", isHomePage ? "absolute z-1" : "border-b-1")}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between p-4">
+        {/* Logo */}
         <Button asChild variant={"outline"}>
           <Link href="/">LOGO</Link>
         </Button>
+
+        {/* Mobile: Navigation Menu */}
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -104,35 +66,39 @@ export default function Header() {
             </SheetHeader>
             <ScrollArea className="overflow-auto">
               <Accordion type="multiple" className="w-full">
-                {navLinks.map((navItem) => (
-                  <AccordionItem value={navItem.value} key={navItem.value}>
-                    <AccordionTrigger className="text-lg">
-                      {navItem.title}
-                    </AccordionTrigger>
-                    <AccordionContent className="flex flex-col text-balance">
-                      {navItem.subLinks.map((link) => (
-                        <SheetClose asChild key={link.href}>
-                          <Button
-                            asChild
-                            variant={"link"}
-                            className="text-foreground"
-                          >
-                            <Link
-                              href={link.href}
-                              className="justify-start underline"
+                <nav>
+                  {navLinks.map((navItem) => (
+                    <AccordionItem value={navItem.value} key={navItem.value}>
+                      <AccordionTrigger className="text-lg">
+                        {navItem.title}
+                      </AccordionTrigger>
+                      <AccordionContent className="flex flex-col text-balance">
+                        {navItem.subLinks.map((link) => (
+                          <SheetClose asChild key={link.href}>
+                            <Button
+                              asChild
+                              variant={"link"}
+                              className="text-foreground"
                             >
-                              {link.text}
-                            </Link>
-                          </Button>
-                        </SheetClose>
-                      ))}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
+                              <Link
+                                href={link.href}
+                                className="justify-start underline"
+                              >
+                                {link.text}
+                              </Link>
+                            </Button>
+                          </SheetClose>
+                        ))}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </nav>
               </Accordion>
             </ScrollArea>
           </SheetContent>
         </Sheet>
+
+        {/* Desktop: Navigation Menu */}
         <NavigationMenu viewport={false} className="hidden md:flex">
           <NavigationMenuList>
             {navLinks.map((navItem) => (
@@ -159,6 +125,8 @@ export default function Header() {
             ))}
           </NavigationMenuList>
         </NavigationMenu>
+
+        {/* Desktop: Call To Action Button */}
         <Button asChild className="col-span-2 hidden md:inline-flex">
           <Link href="/contact">Get a Free Quote</Link>
         </Button>
