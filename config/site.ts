@@ -1,4 +1,4 @@
-import { siFacebook, siInstagram } from "simple-icons";
+import { siFacebook, siInstagram, siYoutube } from "simple-icons";
 
 export const siteConfig = {
   name: "Company Name",
@@ -15,6 +15,11 @@ export const siteConfig = {
       name: "Instagram",
       href: "https://instagram.com",
       icon: siInstagram,
+    },
+    {
+      name: "YouTube",
+      href: "https://youtube.com",
+      icon: siYoutube,
     },
   ],
   contact: {

@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
-export default function Hero() {
+export default function HeroSection() {
   return (
-    <div className="relative flex h-2/3 items-center justify-center">
+    <section className="relative flex h-[66svh] items-center justify-center">
       {/* Background: Hero Video */}
       <video
         autoPlay
@@ -46,6 +46,6 @@ export default function Hero() {
           </Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -40,13 +40,13 @@ export default function Footer() {
           <h3 className="font-semibold">Contact Us</h3>
           <ul>
             <li className="flex items-center gap-2 text-sm">
-              <Phone className="size-[14px] shrink-0" />
+              <Phone className="size-[0.875rem] shrink-0" />
               <a href={`tel:${siteConfig.contact.phone}`} className="underline">
                 {siteConfig.contact.phone}
               </a>
             </li>
             <li className="flex items-center gap-2 text-sm">
-              <Mail className="size-[14px] shrink-0" />
+              <Mail className="size-[0.875rem] shrink-0" />
               <a
                 href={`mailto:${siteConfig.contact.email}`}
                 className="underline"
@@ -55,7 +55,7 @@ export default function Footer() {
               </a>
             </li>
             <li className="flex items-center gap-2 text-sm">
-              <MapPin className="size-[14px] shrink-0" />
+              <MapPin className="size-[0.875rem] shrink-0" />
               <span>{siteConfig.contact.address}</span>
             </li>
           </ul>
@@ -69,10 +69,10 @@ export default function Footer() {
                 size={"icon"}
                 className="size-8"
               >
-                <Link href={social.href} target="_blank" rel="noreferrer">
+                <a href={social.href} target="_blank" rel="noreferrer">
                   <Icon path={social.icon.path} />
                   <span className="sr-only">{social.name}</span>
-                </Link>
+                </a>
               </Button>
             ))}
           </div>
