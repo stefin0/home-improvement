@@ -35,7 +35,7 @@ export const navLinks: NavLink[] = [
     value: "item-4",
     subLinks: [
       { href: "/contact", text: "Contact Us" },
-      { href: "/faqs", text: "FAQs" },
+      { href: "/faq", text: "FAQ" },
     ],
   },
 ];

@@ -1,22 +1,29 @@
+import clsx from "clsx";
+
 interface HomePageSectionProps {
-  title: string;
-  subheading: string;
+  title?: string;
+  subheading?: string;
+  className?: string;
   children: React.ReactNode;
 }
 
 export default function HomePageSection({
   title,
   subheading,
+  className,
   children,
 }: HomePageSectionProps) {
-  const titleId = title.toLowerCase().replace(/\s+/g, "-") + "-heading";
-
   return (
-    <section aria-labelledby={titleId} className="mx-auto max-w-7xl px-4">
-      <h2 id={titleId} className="text-4xl font-bold tracking-tight">
-        {title}
-      </h2>
-      <p className="text-muted-foreground">{subheading}</p>
+    <section className={clsx("mx-auto max-w-7xl px-4", className)}>
+      {title && (
+        <h2
+          id={title.toLowerCase().replace(/\s+/g, "-") + "-heading"}
+          className="text-4xl font-bold tracking-tight"
+        >
+          {title}
+        </h2>
+      )}
+      {subheading && <p className="text-muted-foreground">{subheading}</p>}
       {children}
     </section>
   );

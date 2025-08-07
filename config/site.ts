@@ -1,10 +1,19 @@
 import { siFacebook, siInstagram, siYoutube } from "simple-icons";
 
+const CSLB_LICENSE_NUMBER = 123456;
+const FOUNDING_YEAR = 2000;
+const NAME = "Company Name";
+const URL = "https://home-improvement-tau.vercel.app/";
+
+const companyNameForHref = NAME.replaceAll(" ", "+");
+
 export const siteConfig = {
-  name: "Company Name",
+  name: NAME,
   description:
     "Top-rated home remodeling services in San Diego, specializing in windows, roofing, and more.",
-  url: "https://home-improvement-tau.vercel.app/",
+  url: URL,
+  yearFounded: FOUNDING_YEAR,
+  yearsOfExperience: new Date().getFullYear() - FOUNDING_YEAR,
   socials: [
     {
       name: "Facebook",
@@ -29,7 +38,13 @@ export const siteConfig = {
     serviceArea: "Proudly serving the greater San Diego County.",
   },
   licensing: {
-    licenseNumber: "CSLB #123456",
+    number: CSLB_LICENSE_NUMBER,
     info: "Licensed, Bonded & Insured",
+    href: `https://www.cslb.ca.gov/${CSLB_LICENSE_NUMBER}`,
+    display: `CSLB #${CSLB_LICENSE_NUMBER}`,
   },
+  bbbHref: "https://www.bbb.org/",
+  reviewsHref: `https://www.google.com/search?q=${companyNameForHref}+Reviews`,
+  reviewCount: 250,
+  guaranteeHref: `${URL}faq`,
 };

@@ -69,7 +69,7 @@ export default function Footer() {
                 size={"icon"}
                 className="size-8"
               >
-                <a href={social.href} target="_blank" rel="noreferrer">
+                <a href={social.href} target="_blank" rel="noopener noreferrer">
                   <Icon path={social.icon.path} />
                   <span className="sr-only">{social.name}</span>
                 </a>
