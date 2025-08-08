@@ -1,3 +1,5 @@
+import { services } from "./services";
+
 export type NavLink = {
   title: string;
   value: string;
@@ -13,7 +15,10 @@ export const navLinks: NavLink[] = [
     value: "item-1",
     subLinks: [
       { href: "/services", text: "All Services" },
-      { href: "/services/windows", text: "Windows" },
+      ...services.map((service) => ({
+        href: service.href,
+        text: service.title,
+      })),
     ],
   },
   {

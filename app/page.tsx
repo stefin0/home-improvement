@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <main className="py-4">
+      <main>
         <TrustBadgesSection />
         <ServicesOverviewSection />
         <OurWorkSection />

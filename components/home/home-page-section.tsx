@@ -14,16 +14,18 @@ export default function HomePageSection({
   children,
 }: HomePageSectionProps) {
   return (
-    <section className={clsx("mx-auto max-w-7xl px-4", className)}>
-      {title && (
-        <h2
-          id={title.toLowerCase().replace(/\s+/g, "-") + "-heading"}
-          className="text-4xl font-bold tracking-tight"
-        >
-          {title}
-        </h2>
-      )}
-      {subheading && <p className="text-muted-foreground">{subheading}</p>}
+    <section className={clsx("mx-auto my-4 max-w-7xl px-4", className)}>
+      <div className="mb-4">
+        {title && (
+          <h2
+            id={title.toLowerCase().replace(/\s+/g, "-") + "-heading"}
+            className="text-4xl font-bold tracking-tight"
+          >
+            {title}
+          </h2>
+        )}
+        {subheading && <p className="text-muted-foreground">{subheading}</p>}
+      </div>
       {children}
     </section>
   );
