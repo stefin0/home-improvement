@@ -14,7 +14,7 @@ export default function HomePageSection({
   children,
 }: HomePageSectionProps) {
   return (
-    <section className={clsx("mx-auto my-4 max-w-7xl px-4", className)}>
+    <section className={clsx("mx-auto my-16 max-w-7xl px-4", className)}>
       <div className="mb-4">
         {title && (
           <h2

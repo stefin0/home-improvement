@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/site";
 
 export default function HeroSection() {
   return (
-    <section className="relative flex h-[66svh] items-center justify-center">
+    <section className="relative flex h-[75svh] items-center justify-center">
       {/* Background: Hero Video */}
       <video
         autoPlay
