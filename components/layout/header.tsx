@@ -29,6 +29,7 @@ import {
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/config/nav";
+import CTAButton from "@/components/ui/cta-button";
 
 export default function Header() {
   const pathname = usePathname();
@@ -126,10 +127,8 @@ export default function Header() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Desktop: Call To Action Button */}
-        <Button asChild className="col-span-2 hidden md:inline-flex">
-          <Link href="/contact">Get a Free Quote</Link>
-        </Button>
+        {/* Desktop: Call-To-Action Button */}
+        <CTAButton className="col-span-2 hidden md:inline-flex" />
       </div>
     </header>
   );

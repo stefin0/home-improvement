@@ -4,7 +4,7 @@ import licensedBondedInsured from "@/public/images/home/licensed-bonded-insured.
 import fiveStars from "@/public/images/home/five-stars.svg";
 import satisfactionGuarantee from "@/public/images/home/satisfaction-guarantee.svg";
 import Image from "next/image";
-import HomePageSection from "./home-page-section";
+import { PageSection, PageSectionContent } from "@/components/ui/page-section";
 
 const trustSignals = [
   {
@@ -53,30 +53,32 @@ const trustSignals = [
 
 export default function TrustBadgesSection() {
   return (
-    <HomePageSection>
-      <ul className="mx-auto grid max-w-fit grid-cols-2 justify-items-center gap-4 md:grid-cols-4">
-        {trustSignals.map((trustSignal) => (
-          <li
-            key={trustSignal.alt}
-            className="hover:bg-accent max-w-[12rem] rounded-md p-2 transition-all"
-          >
-            <a
-              href={trustSignal.href}
-              target="_blank"
-              rel="noopener noreferrer"
+    <PageSection>
+      <PageSectionContent>
+        <ul className="mx-auto grid max-w-fit grid-cols-2 justify-items-center gap-4 md:grid-cols-4">
+          {trustSignals.map((trustSignal) => (
+            <li
+              key={trustSignal.alt}
+              className="hover:bg-accent max-w-[12rem] rounded-md p-2 transition-all"
             >
-              <Image
-                src={trustSignal.image}
-                alt={trustSignal.alt}
-                className="mx-auto max-w-[8rem] rounded-md"
-              />
-              <p className="mt-4 text-center text-balance">
-                {trustSignal.text}
-              </p>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </HomePageSection>
+              <a
+                href={trustSignal.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src={trustSignal.image}
+                  alt={trustSignal.alt}
+                  className="mx-auto max-w-[8rem] rounded-md"
+                />
+                <p className="mt-4 text-center text-balance">
+                  {trustSignal.text}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </PageSectionContent>
+    </PageSection>
   );
 }

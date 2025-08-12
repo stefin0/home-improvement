@@ -46,5 +46,5 @@ export const siteConfig = {
   bbbHref: "https://www.bbb.org/",
   reviewsHref: `https://www.google.com/search?q=${companyNameForHref}+Reviews`,
   reviewCount: 250,
-  guaranteeHref: `${URL}faq`,
+  guaranteeHref: "/faq",
 };

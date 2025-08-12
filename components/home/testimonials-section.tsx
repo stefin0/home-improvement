@@ -1,12 +1,20 @@
-import HomePageSection from "./home-page-section";
+import {
+  PageSection,
+  PageSectionDescription,
+  PageSectionHeader,
+  PageSectionTitle,
+} from "@/components/ui/page-section";
 
 export default function TestimonialsSection() {
   return (
-    <HomePageSection
-      title="Testimonials"
-      subheading="See what our customers have to say."
-    >
+    <PageSection>
+      <PageSectionHeader>
+        <PageSectionTitle>Testimonials</PageSectionTitle>
+        <PageSectionDescription>
+          See what our customers have to say.
+        </PageSectionDescription>
+      </PageSectionHeader>
       <p>Child of TestimonialsSection</p>
-    </HomePageSection>
+    </PageSection>
   );
 }

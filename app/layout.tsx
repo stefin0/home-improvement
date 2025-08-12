@@ -32,10 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} h-dvh antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
       >
         <Header />
-        {children}
+        <main className="grow">{children}</main>
         <Footer />
       </body>
     </html>

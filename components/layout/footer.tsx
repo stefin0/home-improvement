@@ -58,24 +58,29 @@ export default function Footer() {
               <MapPin className="size-[0.875rem] shrink-0" />
               <span>{siteConfig.contact.address}</span>
             </li>
+            {/* Social media links */}
+            <div className="flex gap-2 pt-2">
+              {siteConfig.socials.map((social) => (
+                <li key={social.name}>
+                  <Button
+                    asChild
+                    variant={"outline"}
+                    size={"icon"}
+                    className="size-8"
+                  >
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Icon path={social.icon.path} />
+                      <span className="sr-only">{social.name}</span>
+                    </a>
+                  </Button>
+                </li>
+              ))}
+            </div>
           </ul>
-          {/* Social media links */}
-          <div className="flex gap-2 pt-2">
-            {siteConfig.socials.map((social) => (
-              <Button
-                key={social.name}
-                asChild
-                variant={"outline"}
-                size={"icon"}
-                className="size-8"
-              >
-                <a href={social.href} target="_blank" rel="noopener noreferrer">
-                  <Icon path={social.icon.path} />
-                  <span className="sr-only">{social.name}</span>
-                </a>
-              </Button>
-            ))}
-          </div>
         </div>
       </div>
 

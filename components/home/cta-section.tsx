@@ -1,12 +1,23 @@
-import HomePageSection from "./home-page-section";
+import {
+  PageSection,
+  PageSectionContent,
+  PageSectionDescription,
+  PageSectionHeader,
+  PageSectionTitle,
+} from "@/components/ui/page-section";
 
 export default function CTASection() {
   return (
-    <HomePageSection
-      title="Ready to Start Your Project?"
-      subheading="We'll help you get started."
-    >
-      <p>Child of CTASection</p>
-    </HomePageSection>
+    <PageSection>
+      <PageSectionHeader>
+        <PageSectionTitle>Ready to Start Your Project?</PageSectionTitle>
+        <PageSectionDescription>
+          We&apos;ll help you get started.
+        </PageSectionDescription>
+      </PageSectionHeader>
+      <PageSectionContent>
+        <p>Child of CTASection</p>
+      </PageSectionContent>
+    </PageSection>
   );
 }

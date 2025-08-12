@@ -1,4 +1,3 @@
-import HomePageSection from "./home-page-section";
 import Image from "next/image";
 import { ReactCompareSlider } from "react-compare-slider";
 import windowsBefore from "@/public/images/before-after/windows/before-001.jpg";
@@ -14,6 +13,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  PageSection,
+  PageSectionContent,
+  PageSectionDescription,
+  PageSectionHeader,
+  PageSectionTitle,
+} from "@/components/ui/page-section";
 
 const ourWorkData = [
   {
@@ -56,36 +62,42 @@ const ourWorkData = [
 
 export default function OurWorkSection() {
   return (
-    <HomePageSection title="Our Work" subheading="View our previous work.">
-      <ul className="grid gap-8">
-        {ourWorkData.map((work) => (
-          <li key={work.service}>
-            <Card className="pt-0">
-              <CardContent className="p-0">
-                <ReactCompareSlider
-                  itemOne={<Image src={work.before} alt="before image" />}
-                  itemTwo={<Image src={work.after} alt="after image" />}
-                  className="rounded-t-2xl"
-                />
-              </CardContent>
-              <CardHeader>
-                <CardTitle className="text-2xl">{work.service}</CardTitle>
-                <CardDescription className="grid md:grid-cols-2">
-                  <p className="mb-8 md:mr-4 md:mb-0">{work.description}</p>
-                  <blockquote className="border-l-2 pl-6 italic">
-                    &quot;{work.testimonial.quote}&quot;
-                    <br />
-                    <br />
-                    <cite className="not-italic">
-                      - {work.testimonial.client}
-                    </cite>
-                  </blockquote>
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </li>
-        ))}
-      </ul>
-    </HomePageSection>
+    <PageSection>
+      <PageSectionHeader>
+        <PageSectionTitle>Our Work</PageSectionTitle>
+        <PageSectionDescription>View our previous work.</PageSectionDescription>
+      </PageSectionHeader>
+      <PageSectionContent>
+        <ul className="grid gap-8">
+          {ourWorkData.map((work) => (
+            <li key={work.service}>
+              <Card className="pt-0">
+                <CardContent className="p-0">
+                  <ReactCompareSlider
+                    itemOne={<Image src={work.before} alt="before image" />}
+                    itemTwo={<Image src={work.after} alt="after image" />}
+                    className="rounded-t-2xl"
+                  />
+                </CardContent>
+                <CardHeader>
+                  <CardTitle className="text-2xl">{work.service}</CardTitle>
+                  <CardDescription className="grid md:grid-cols-2">
+                    <p className="mb-8 md:mr-4 md:mb-0">{work.description}</p>
+                    <blockquote className="border-l-2 pl-6 italic">
+                      &quot;{work.testimonial.quote}&quot;
+                      <br />
+                      <br />
+                      <cite className="not-italic">
+                        - {work.testimonial.client}
+                      </cite>
+                    </blockquote>
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </li>
+          ))}
+        </ul>
+      </PageSectionContent>
+    </PageSection>
   );
 }
