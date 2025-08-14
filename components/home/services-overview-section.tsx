@@ -15,6 +15,7 @@ import {
   PageSection,
   PageSectionContent,
   PageSectionDescription,
+  PageSectionFooter,
   PageSectionHeader,
   PageSectionTitle,
 } from "@/components/ui/page-section";
@@ -28,7 +29,7 @@ export default function ServicesOverviewSection() {
           Quality craftsmanship for every part of your home.
         </PageSectionDescription>
       </PageSectionHeader>
-      <PageSectionContent>
+      <PageSectionContent className="grid gap-4">
         <ul className="grid-auto-rows-[auto_1fr_auto] grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
             <li key={service.title} className="contents">
@@ -58,6 +59,11 @@ export default function ServicesOverviewSection() {
           ))}
         </ul>
       </PageSectionContent>
+      <PageSectionFooter className="justify-self-center">
+        <Button variant={"outline"} asChild>
+          <Link href="/services">View All Services</Link>
+        </Button>
+      </PageSectionFooter>
     </PageSection>
   );
 }

@@ -65,6 +65,9 @@ export default function Header() {
                 Menu
               </SheetTitle>
             </SheetHeader>
+            <SheetClose asChild>
+              <CTAButton />
+            </SheetClose>
             <ScrollArea className="overflow-auto">
               <Accordion type="multiple" className="w-full">
                 <nav>

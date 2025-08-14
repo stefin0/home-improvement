@@ -17,9 +17,12 @@ import {
   PageSection,
   PageSectionContent,
   PageSectionDescription,
+  PageSectionFooter,
   PageSectionHeader,
   PageSectionTitle,
 } from "@/components/ui/page-section";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const ourWorkData = [
   {
@@ -67,7 +70,7 @@ export default function OurWorkSection() {
         <PageSectionTitle>Our Work</PageSectionTitle>
         <PageSectionDescription>View our previous work.</PageSectionDescription>
       </PageSectionHeader>
-      <PageSectionContent>
+      <PageSectionContent className="grid gap-4">
         <ul className="grid gap-8">
           {ourWorkData.map((work) => (
             <li key={work.service}>
@@ -98,6 +101,14 @@ export default function OurWorkSection() {
           ))}
         </ul>
       </PageSectionContent>
+      <PageSectionFooter className="grid grid-cols-2 gap-4 justify-self-center">
+        <Button variant={"outline"}>
+          <Link href="/gallery">View Gallery</Link>
+        </Button>
+        <Button variant={"outline"}>
+          <Link href="/testimonials">View Testimonials</Link>
+        </Button>
+      </PageSectionFooter>
     </PageSection>
   );
 }

@@ -5,18 +5,42 @@ import {
   PageSectionHeader,
   PageSectionTitle,
 } from "@/components/ui/page-section";
+import CTAButton from "../ui/cta-button";
+import { Mail, Phone } from "lucide-react";
+import { siteConfig } from "@/config/site";
 
 export default function CTASection() {
   return (
-    <PageSection>
-      <PageSectionHeader>
+    <PageSection className="my-8">
+      <PageSectionHeader className="mb-8 text-center">
         <PageSectionTitle>Ready to Start Your Project?</PageSectionTitle>
         <PageSectionDescription>
-          We&apos;ll help you get started.
+          We&apos;re here to help you get started. Reach out to us for a free
+          quote, or if you have any questions.
         </PageSectionDescription>
       </PageSectionHeader>
-      <PageSectionContent>
-        <p>Child of CTASection</p>
+      <PageSectionContent className="grid justify-items-center gap-4">
+        <CTAButton />
+        <div className="text-muted-foreground">
+          <div className="flex items-center justify-center gap-2 text-sm">
+            <Phone className="size-[0.875rem] shrink-0" />
+            <a
+              href={`tel:${siteConfig.contact.phone}`}
+              className="hover:underline"
+            >
+              {siteConfig.contact.phone}
+            </a>
+          </div>
+          <div className="flex items-center justify-center gap-2 text-sm">
+            <Mail className="size-[0.875rem] shrink-0" />
+            <a
+              href={`mailto:${siteConfig.contact.email}`}
+              className="hover:underline"
+            >
+              {siteConfig.contact.email}
+            </a>
+          </div>
+        </div>
       </PageSectionContent>
     </PageSection>
   );

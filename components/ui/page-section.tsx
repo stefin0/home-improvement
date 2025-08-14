@@ -9,7 +9,7 @@ const PageSection = React.forwardRef<
     <section
       ref={ref}
       data-slot="page-section"
-      className={cn("", className)}
+      className={cn("grid gap-4", className)}
       {...props}
     />
   );
@@ -24,7 +24,7 @@ const PageSectionHeader = React.forwardRef<
     <div
       ref={ref}
       data-slot="page-section-header"
-      className={cn("mb-4", className)}
+      className={cn("", className)}
       {...props}
     />
   );
@@ -76,10 +76,26 @@ const PageSectionContent = React.forwardRef<
 });
 PageSectionContent.displayName = "PageSectionContent";
 
+const PageSectionFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(function PageSectionFooter({ className, ...props }, ref) {
+  return (
+    <div
+      ref={ref}
+      data-slot="page-section-footer"
+      className={cn("", className)}
+      {...props}
+    />
+  );
+});
+PageSectionFooter.displayName = "PageSectionFooter";
+
 export {
   PageSection,
   PageSectionHeader,
   PageSectionTitle,
   PageSectionDescription,
   PageSectionContent,
+  PageSectionFooter,
 };
