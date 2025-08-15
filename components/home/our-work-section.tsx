@@ -1,11 +1,9 @@
-import Image from "next/image";
-import { ReactCompareSlider } from "react-compare-slider";
-import windowsBefore from "@/public/images/before-after/windows/before-001.jpg";
-import windowsAfter from "@/public/images/before-after/windows/after-001.jpg";
+import paintingBefore from "@/public/images/before-after/painting/before-001.jpg";
+import paintingAfter from "@/public/images/before-after/painting/after-001.jpg";
 import roofingBefore from "@/public/images/before-after/roofing/before-001.jpg";
 import roofingAfter from "@/public/images/before-after/roofing/after-001.jpg";
-import sidingBefore from "@/public/images/before-after/siding/before-001.jpg";
-import sidingAfter from "@/public/images/before-after/siding/after-001.jpg";
+import windowsBefore from "@/public/images/before-after/windows/before-001.jpg";
+import windowsAfter from "@/public/images/before-after/windows/after-001.jpg";
 import {
   Card,
   CardContent,
@@ -23,18 +21,25 @@ import {
 } from "@/components/ui/page-section";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  ImageComparison,
+  ImageComparisonImage,
+  ImageComparisonSlider,
+} from "@/components/ui/comparison";
+import { GripVertical } from "lucide-react";
 
 const ourWorkData = [
   {
-    service: "Windows",
-    before: windowsBefore,
-    after: windowsAfter,
+    service: "Painting",
+    before: paintingBefore,
+    after: paintingAfter,
     description:
-      "This project involved a complete overhaul of the home's windows, replacing old, inefficient units with modern, energy-efficient models. The new windows not only enhance the home's curb appeal but also provide significant savings on energy bills.",
+      "This project gave the home's exterior a complete refresh, replacing the faded, dated paint with a modern color scheme. The fresh coat not only provides a stunning boost to curb appeal but also adds a crucial layer of protection against the elements.",
     testimonial: {
       quote:
-        "We were blown away by the difference the new windows made. Our home is quieter, more comfortable, and our energy bills have dropped significantly. The team was professional, efficient, and a pleasure to work with.",
-      client: "John and Jane Doe",
+        "We're absolutely thrilled with the transformation. The attention to detail was exceptional, and our home looks brand new again. The entire team was professional, efficient, and a pleasure to have around.",
+      client: "The Johnson Family",
     },
   },
   {
@@ -50,15 +55,15 @@ const ourWorkData = [
     },
   },
   {
-    service: "Siding",
-    before: sidingBefore,
-    after: sidingAfter,
+    service: "Windows",
+    before: windowsBefore,
+    after: windowsAfter,
     description:
-      "This project involved updating the home's exterior with beautiful and resilient new siding. The new siding not only gives the home a fresh, modern look but also provides an extra layer of protection against the weather.",
+      "This project involved a complete overhaul of the home's windows, replacing old, inefficient units with modern, energy-efficient models. The new windows not only enhance the home's curb appeal but also provide significant savings on energy bills.",
     testimonial: {
       quote:
-        "The new siding is absolutely beautiful. Our home looks like a brand-new house. The installation team was meticulous and their attention to detail was impressive. We couldn't be happier with the result.",
-      client: "The Williams Family",
+        "We were blown away by the difference the new windows made. Our home is quieter, more comfortable, and our energy bills have dropped significantly. The team was professional, efficient, and a pleasure to work with.",
+      client: "John and Jane Doe",
     },
   },
 ];
@@ -76,11 +81,33 @@ export default function OurWorkSection() {
             <li key={work.service}>
               <Card className="pt-0">
                 <CardContent className="p-0">
-                  <ReactCompareSlider
-                    itemOne={<Image src={work.before} alt="before image" />}
-                    itemTwo={<Image src={work.after} alt="after image" />}
-                    className="rounded-t-2xl"
-                  />
+                  <AspectRatio ratio={3 / 2}>
+                    <ImageComparison
+                      className="h-full"
+                      enableHover
+                      springOptions={{
+                        bounce: 0.3,
+                      }}
+                    >
+                      <ImageComparisonImage
+                        src={work.before.src}
+                        alt="before image"
+                        position="left"
+                        className="rounded-t-2xl"
+                      />
+                      <ImageComparisonImage
+                        src={work.after.src}
+                        alt="after image"
+                        position="right"
+                        className="rounded-t-2xl"
+                      />
+                      <ImageComparisonSlider className="w-2 bg-white">
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white px-0.5 py-1.5">
+                          <GripVertical className="text-muted-foreground" />
+                        </div>
+                      </ImageComparisonSlider>
+                    </ImageComparison>
+                  </AspectRatio>
                 </CardContent>
                 <CardHeader>
                   <CardTitle className="text-2xl">{work.service}</CardTitle>

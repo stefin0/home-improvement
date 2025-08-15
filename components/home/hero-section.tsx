@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import CTAButton from "@/components/ui/cta-button";
+import { TextEffect } from "@/components/ui/text-effect";
 
 export default function HeroSection() {
   return (
-    <section className="relative flex h-[75svh] items-center justify-center">
+    <section className="relative flex h-[85svh] items-center justify-center">
       {/* Background: Hero Video */}
       <video
         autoPlay
@@ -20,16 +21,26 @@ export default function HeroSection() {
 
       {/* Foreground: Hero Text & Call-To-Action Buttons */}
       <div className="grid max-w-7xl justify-items-center gap-6 px-4 text-center text-balance">
-        <h1
-          className="text-primary-foreground leading-none font-extrabold tracking-tighter"
+        <TextEffect
+          as="h1"
+          per="char"
+          preset="blur"
+          speedReveal={0.5}
+          className="text-primary-foreground max-w-4xl leading-none font-extrabold tracking-tighter"
           style={{ fontSize: "clamp(1rem, 5vw + 1rem, 5rem)" }}
         >
           San Diego&apos;s Home Improvement Experts.
-        </h1>
-        <p className="text-primary-foreground/80 max-w-md">
-          We specialize in roofing, windows, and exterior painting with a
-          commitment to quality and integrity.
-        </p>
+        </TextEffect>
+        <TextEffect
+          per="char"
+          preset="blur"
+          delay={2.5}
+          speedReveal={2}
+          className="text-primary-foreground/80 max-w-md"
+        >
+          We specialize in painting, roofing, and windows with a commitment to
+          quality and integrity.
+        </TextEffect>
         <div className="flex flex-col items-center gap-2 sm:flex-row">
           <Button
             variant="outline"
