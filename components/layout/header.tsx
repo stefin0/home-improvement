@@ -26,18 +26,48 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/config/nav";
 import CTAButton from "@/components/ui/cta-button";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+  const [isPastHero, setIsPastHero] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() || 0;
+    if (latest > previous && latest > 50) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
+
+  const HERO_SCROLL_THRESHOLD = 0.8;
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsPastHero(latest > window.innerHeight * HERO_SCROLL_THRESHOLD);
+  });
+
   return (
-    <header
-      className={cn("w-full", isHomePage ? "absolute z-1" : "border-b-1")}
+    <motion.header
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" },
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className={cn("top-0 z-50 w-full transition-colors", {
+        sticky: !isHomePage,
+        fixed: isHomePage,
+        "bg-background border-b shadow-sm": !isHomePage || isPastHero,
+        "border-0 bg-transparent": isHomePage && !isPastHero,
+      })}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between p-4">
         {/* Logo */}
@@ -53,7 +83,9 @@ export default function Header() {
               size={"icon"}
               className={cn(
                 "size-8 justify-self-end md:hidden",
-                isHomePage ? "text-primary-foreground" : "",
+                isHomePage &&
+                  !isPastHero &&
+                  "text-primary-foreground bg-transparent",
               )}
             >
               <Menu />
@@ -109,7 +141,9 @@ export default function Header() {
               <NavigationMenuItem key={navItem.value}>
                 <NavigationMenuTrigger
                   className={cn(
-                    isHomePage ? "text-primary-foreground bg-transparent" : "",
+                    isHomePage &&
+                      !isPastHero &&
+                      "text-primary-foreground bg-transparent",
                   )}
                 >
                   {navItem.title}
@@ -133,6 +167,6 @@ export default function Header() {
         {/* Desktop: Call-To-Action Button */}
         <CTAButton className="col-span-2 hidden md:inline-flex" />
       </div>
-    </header>
+    </motion.header>
   );
 }
