@@ -1,9 +1,8 @@
 import { navLinks } from "@/config/nav";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Icon } from "@/components/icon";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { SocialButton } from "@/components/ui/custom-buttons";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -25,7 +24,10 @@ export default function Footer() {
               <ul>
                 {section.subLinks.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm underline">
+                    <Link
+                      href={link.href}
+                      className="hover:text-foreground text-sm underline"
+                    >
                       {link.text}
                     </Link>
                   </li>
@@ -41,7 +43,10 @@ export default function Footer() {
           <ul>
             <li className="flex items-center gap-2 text-sm">
               <Phone className="size-[0.875rem] shrink-0" />
-              <a href={`tel:${siteConfig.contact.phone}`} className="underline">
+              <a
+                href={`tel:${siteConfig.contact.phone}`}
+                className="hover:text-foreground underline"
+              >
                 {siteConfig.contact.phone}
               </a>
             </li>
@@ -49,7 +54,7 @@ export default function Footer() {
               <Mail className="size-[0.875rem] shrink-0" />
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="underline"
+                className="hover:text-foreground underline"
               >
                 {siteConfig.contact.email}
               </a>
@@ -62,21 +67,12 @@ export default function Footer() {
             <div className="flex gap-2 pt-2">
               {siteConfig.socials.map((social) => (
                 <li key={social.name}>
-                  <Button
-                    asChild
+                  <SocialButton
+                    social={social}
                     variant={"outline"}
                     size={"icon"}
                     className="size-8"
-                  >
-                    <a
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Icon path={social.icon.path} />
-                      <span className="sr-only">{social.name}</span>
-                    </a>
-                  </Button>
+                  />
                 </li>
               ))}
             </div>

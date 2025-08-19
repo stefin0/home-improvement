@@ -72,8 +72,11 @@ export default function OurWorkSection() {
   return (
     <PageSection>
       <PageSectionHeader>
-        <PageSectionTitle>Our Work</PageSectionTitle>
-        <PageSectionDescription>View our previous work.</PageSectionDescription>
+        <PageSectionTitle>Gallery &amp; Testimonials</PageSectionTitle>
+        <PageSectionDescription>
+          Explore our past projects and see why homeowners trust us with their
+          renovation needs.
+        </PageSectionDescription>
       </PageSectionHeader>
       <PageSectionContent className="grid gap-4">
         <ul className="grid gap-8">
@@ -92,13 +95,13 @@ export default function OurWorkSection() {
                       <ImageComparisonImage
                         src={work.before.src}
                         alt="before image"
-                        position="left"
+                        position="right"
                         className="rounded-t-2xl"
                       />
                       <ImageComparisonImage
                         src={work.after.src}
                         alt="after image"
-                        position="right"
+                        position="left"
                         className="rounded-t-2xl"
                       />
                       <ImageComparisonSlider className="w-2 bg-white">

@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { services } from "@/config/services";
 import Link from "next/link";
-import { AspectRatio } from "../ui/aspect-ratio";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   PageSection,
   PageSectionContent,
@@ -40,6 +40,7 @@ export default function ServicesOverviewSection() {
                       <Image
                         src={service.image}
                         alt={service.title}
+                        fill
                         className="object-cover transition hover:scale-110"
                       />
                     </AspectRatio>

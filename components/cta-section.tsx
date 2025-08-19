@@ -35,11 +35,11 @@ export default function CTASection() {
           <div className="flex flex-col">
             <PhoneButton
               variant={"link"}
-              className="text-muted-foreground underline"
+              className="hover:text-foreground text-muted-foreground underline"
             />
             <EmailButton
               variant={"link"}
-              className="text-muted-foreground underline"
+              className="hover:text-foreground text-muted-foreground underline"
             />
           </div>
         </PageSectionContent>

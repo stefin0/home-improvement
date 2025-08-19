@@ -13,31 +13,28 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Clock, MapPin, ShieldCheck } from "lucide-react";
+import { siteConfig } from "@/config/site";
 
 const generalInfoItems = [
   {
     icon: Clock,
     title: "Business Hours",
     description: "Our team is available during these times.",
-    content: [
-      "Monday - Friday: 8:00 AM - 5:00 PM",
-      "Saturday: 9:00 AM - 1:00 PM",
-      "Sunday: Closed",
-    ],
+    content: siteConfig.contact.businessHours,
   },
   {
     icon: MapPin,
     title: "Service Area",
     description: "Proudly serving our local communities.",
-    content: ["We serve the greater San Diego area."],
+    content: [siteConfig.contact.serviceArea],
   },
   {
     icon: ShieldCheck,
     title: "Licensed, Bonded, Insured",
     description: "Your peace of mind is our priority.",
     content: [
-      "We are a fully licensed and insured contractor, committed to professional and safe service.",
-      "License #: 123456",
+      siteConfig.licensing.info,
+      `License #: ${siteConfig.licensing.number}`,
     ],
   },
 ];

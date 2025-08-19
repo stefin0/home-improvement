@@ -19,16 +19,20 @@ export const siteConfig = {
       name: "Facebook",
       href: "https://facebook.com",
       icon: siFacebook,
+      description: "See our latest projects and connect with our community.",
     },
     {
       name: "Instagram",
       href: "https://instagram.com",
       icon: siInstagram,
+      description:
+        "Get inspired by our portfolio of beautiful home transformations.",
     },
     {
       name: "YouTube",
       href: "https://youtube.com",
       icon: siYoutube,
+      description: "Watch behind-the-scenes videos and customer testimonials.",
     },
   ],
   contact: {
@@ -36,6 +40,11 @@ export const siteConfig = {
     email: "contact@example.com",
     address: "1234 Innovation Drive, San Diego, CA 92101",
     serviceArea: "Proudly serving the greater San Diego County.",
+    businessHours: [
+      "Monday - Friday: 8:00 AM - 5:00 PM",
+      "Saturday: 9:00 AM - 1:00 PM",
+      "Sunday: Closed",
+    ],
   },
   licensing: {
     number: CSLB_LICENSE_NUMBER,
