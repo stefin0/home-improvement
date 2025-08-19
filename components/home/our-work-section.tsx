@@ -129,10 +129,10 @@ export default function OurWorkSection() {
         </ul>
       </PageSectionContent>
       <PageSectionFooter className="grid grid-cols-2 gap-4 justify-self-center">
-        <Button variant={"outline"}>
+        <Button asChild variant={"outline"}>
           <Link href="/gallery">View Gallery</Link>
         </Button>
-        <Button variant={"outline"}>
+        <Button asChild variant={"outline"}>
           <Link href="/testimonials">View Testimonials</Link>
         </Button>
       </PageSectionFooter>

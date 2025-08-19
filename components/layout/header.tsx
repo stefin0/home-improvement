@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/config/nav";
-import CTAButton from "@/components/ui/cta-button";
+import { CTAButton } from "@/components/ui/custom-buttons";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";

@@ -5,10 +5,12 @@ import {
   PageSectionHeader,
   PageSectionTitle,
 } from "@/components/ui/page-section";
-import CTAButton from "../ui/cta-button";
-import { Mail, Phone } from "lucide-react";
-import { siteConfig } from "@/config/site";
 import { InView } from "@/components/ui/in-view";
+import {
+  CTAButton,
+  EmailButton,
+  PhoneButton,
+} from "@/components/ui/custom-buttons";
 
 export default function CTASection() {
   return (
@@ -30,25 +32,15 @@ export default function CTASection() {
         </PageSectionHeader>
         <PageSectionContent className="grid justify-items-center gap-4">
           <CTAButton />
-          <div className="text-muted-foreground">
-            <div className="flex items-center justify-center gap-2 text-sm">
-              <Phone className="size-[0.875rem] shrink-0" />
-              <a
-                href={`tel:${siteConfig.contact.phone}`}
-                className="hover:underline"
-              >
-                {siteConfig.contact.phone}
-              </a>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-sm">
-              <Mail className="size-[0.875rem] shrink-0" />
-              <a
-                href={`mailto:${siteConfig.contact.email}`}
-                className="hover:underline"
-              >
-                {siteConfig.contact.email}
-              </a>
-            </div>
+          <div className="flex flex-col">
+            <PhoneButton
+              variant={"link"}
+              className="text-muted-foreground underline"
+            />
+            <EmailButton
+              variant={"link"}
+              className="text-muted-foreground underline"
+            />
           </div>
         </PageSectionContent>
       </InView>

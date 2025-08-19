@@ -1,7 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Phone } from "lucide-react";
-import { siteConfig } from "@/config/site";
-import CTAButton from "@/components/ui/cta-button";
+import { CTAButton, PhoneButton } from "@/components/ui/custom-buttons";
 import { TextEffect } from "@/components/ui/text-effect";
 
 export default function HeroSection() {
@@ -19,8 +16,8 @@ export default function HeroSection() {
         Your browser does not support the video tag.
       </video>
 
-      {/* Foreground: Hero Text & Call-To-Action Buttons */}
       <div className="grid max-w-7xl justify-items-center gap-6 px-4 text-center text-balance">
+        {/* Foreground: Hero Text */}
         <TextEffect
           as="h1"
           per="char"
@@ -41,17 +38,13 @@ export default function HeroSection() {
           We specialize in painting, roofing, and windows with a commitment to
           quality and integrity.
         </TextEffect>
+
+        {/* Foreground: CTA Buttons */}
         <div className="flex flex-col items-center gap-2 sm:flex-row">
-          <Button
-            variant="outline"
+          <PhoneButton
+            variant={"outline"}
             className="text-primary-foreground bg-transparent"
-            asChild
-          >
-            <a href={`tel:${siteConfig.contact.phone}`}>
-              <Phone />
-              {siteConfig.contact.phone}
-            </a>
-          </Button>
+          />
           <CTAButton className="w-full sm:w-auto" />
         </div>
       </div>
