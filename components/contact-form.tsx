@@ -17,11 +17,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { services } from "@/config/services";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTransition } from "react";
+import { Service } from "@/lib/types";
 
-export default function ContactForm() {
+export default function ContactForm({ services }: { services: Service[] }) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<ContactFormValues>({
@@ -126,12 +126,12 @@ export default function ContactForm() {
                   <div className="grid gap-6">
                     {services.map((item) => (
                       <FormField
-                        key={item.href}
+                        key={item.id}
                         control={form.control}
                         name="services"
                         render={({ field }) => {
                           return (
-                            <FormItem key={item.href} className="flex">
+                            <FormItem key={item.id} className="flex">
                               <FormControl>
                                 <Checkbox
                                   checked={field.value?.includes(item.title)}

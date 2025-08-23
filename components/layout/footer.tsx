@@ -1,11 +1,12 @@
-import { navLinks } from "@/config/nav";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SocialButton } from "@/components/ui/custom-buttons";
+import { getNavLinks } from "@/config/nav";
 
-export default function Footer() {
+export default async function Footer() {
   const currentYear = new Date().getFullYear();
+  const navLinks = await getNavLinks();
 
   return (
     <footer className="bg-muted text-muted-foreground">

@@ -6,8 +6,12 @@ import {
   PageSectionHeader,
   PageSectionTitle,
 } from "@/components/ui/page-section";
+import { fetchApi } from "@/lib/strapi";
+import { Service } from "@/lib/types";
 
-export default function FreeQuoteSection() {
+export default async function FreeQuoteSection() {
+  const services = await fetchApi<Service[]>("services");
+
   return (
     <PageSection>
       <PageSectionHeader>
@@ -20,7 +24,7 @@ export default function FreeQuoteSection() {
         </PageSectionDescription>
       </PageSectionHeader>
       <PageSectionContent>
-        <ContactForm />
+        <ContactForm services={services.data} />
       </PageSectionContent>
     </PageSection>
   );

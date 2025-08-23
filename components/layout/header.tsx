@@ -27,14 +27,14 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { navLinks } from "@/config/nav";
 import { CTAButton } from "@/components/ui/custom-buttons";
 import { motion, useScroll } from "motion/react";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useHeaderStore } from "@/lib/store";
+import { NavLink } from "@/config/nav";
 
-export default function Header() {
+export default function Header({ navLinks }: { navLinks: NavLink[] }) {
   const isPastHero = useHeaderStore((state) => state.isPastHero);
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);

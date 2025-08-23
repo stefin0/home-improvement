@@ -10,7 +10,7 @@ import { HeroScrollTrigger } from "@/components/hero-scroll-trigger";
 // import TrustBadgesSection from "@/components/home/trust-badges-section";
 
 export default async function Home() {
-  const heroData = await fetchApi<Hero>("hero", {
+  const { data: heroData } = await fetchApi<Hero>("hero", {
     populate: "backgroundVideo",
   });
 

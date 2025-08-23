@@ -5,6 +5,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { siteConfig } from "@/config/site";
 import { LenisProvider } from "@/components/providers/lenis-provider";
+import { getNavLinks } from "@/config/nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,18 +26,20 @@ export const metadata: Metadata = {
   // openGraph: { ... }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const navLinks = await getNavLinks();
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
       >
         <LenisProvider>
-          <Header />
+          <Header navLinks={navLinks} />
           <main className="grow">{children}</main>
           <Footer />
         </LenisProvider>
