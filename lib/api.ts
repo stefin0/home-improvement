@@ -1,5 +1,5 @@
 async function twentyApiRequest(endpoint: string, payload: object) {
-  const url = `${process.env.TWENTY_API_URL}/rest/${endpoint}`;
+  const url = `${process.env.NEXT_PUBLIC_TWENTY_API_URL}/rest/${endpoint}`;
   const response = await fetch(url, {
     method: "POST",
     headers: {

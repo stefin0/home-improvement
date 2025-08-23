@@ -29,30 +29,39 @@ import {
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/config/nav";
 import { CTAButton } from "@/components/ui/custom-buttons";
-import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import { useState } from "react";
+import { motion, useScroll } from "motion/react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useHeaderStore } from "@/lib/store";
 
 export default function Header() {
+  const isPastHero = useHeaderStore((state) => state.isPastHero);
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
-  const [isPastHero, setIsPastHero] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() || 0;
-    if (latest > previous && latest > 50) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-  });
+  useEffect(() => {
+    let previousScroll = scrollY.getPrevious() || 0;
 
-  const HERO_SCROLL_THRESHOLD = 0.8;
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsPastHero(latest > window.innerHeight * HERO_SCROLL_THRESHOLD);
-  });
+    const handleScroll = () => {
+      const latestScroll = scrollY.get();
+
+      if (latestScroll > previousScroll && latestScroll > 50) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+
+      previousScroll = latestScroll;
+    };
+
+    handleScroll();
+
+    const unsubscribe = scrollY.on("change", handleScroll);
+
+    return () => unsubscribe();
+  }, [scrollY]);
 
   return (
     <motion.header
@@ -62,12 +71,14 @@ export default function Header() {
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className={cn("top-0 z-50 w-full transition-colors", {
-        sticky: !isHomePage,
-        fixed: isHomePage,
-        "bg-background border-b shadow-sm": !isHomePage || isPastHero,
-        "border-0 bg-transparent": isHomePage && !isPastHero,
-      })}
+      className={cn(
+        "top-0 z-50 w-full transition-colors",
+        isHomePage ? "fixed" : "sticky",
+        {
+          "bg-background border-b shadow-sm": !isHomePage || isPastHero,
+          "border-0 bg-transparent": isHomePage && !isPastHero,
+        },
+      )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between p-4">
         {/* Logo */}

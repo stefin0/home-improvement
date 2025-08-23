@@ -1,7 +1,17 @@
+"use client";
+
 import { CTAButton, PhoneButton } from "@/components/ui/custom-buttons";
 import { TextEffect } from "@/components/ui/text-effect";
+import { Hero } from "@/lib/types";
 
-export default function HeroSection() {
+type HeroSectionProps = {
+  data: Hero;
+};
+
+export default function HeroSection({ data }: HeroSectionProps) {
+  const { heading, subtitle, backgroundVideo } = data;
+  const videoUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${backgroundVideo.url}`;
+
   return (
     <section className="relative flex h-[85svh] items-center justify-center">
       {/* Background: Hero Video */}
@@ -11,8 +21,9 @@ export default function HeroSection() {
         muted
         playsInline
         className="absolute inset-0 -z-1 h-full w-full object-cover brightness-30"
+        key={videoUrl}
       >
-        <source src="/hero-video.mp4" type="video/mp4" />
+        <source src={videoUrl} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -26,7 +37,7 @@ export default function HeroSection() {
           className="text-primary-foreground max-w-4xl leading-none font-extrabold tracking-tighter"
           style={{ fontSize: "clamp(1rem, 5vw + 1rem, 5rem)" }}
         >
-          San Diego&apos;s Home Improvement Experts.
+          {heading}
         </TextEffect>
         <TextEffect
           per="char"
@@ -35,8 +46,7 @@ export default function HeroSection() {
           speedReveal={2}
           className="text-primary-foreground/80 max-w-md"
         >
-          We specialize in painting, roofing, and windows with a commitment to
-          quality and integrity.
+          {subtitle}
         </TextEffect>
 
         {/* Foreground: CTA Buttons */}
